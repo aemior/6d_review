@@ -20,5 +20,26 @@
 ### related work
 
 - 整体方法Holistic methods：模板匹配，鲁棒性太差。其他端到端的方法，如果使用神经网络模型做回归任务（回归出物体姿态），那么搜索空间太大，如果使用网络做分类任务（实现将姿态离散化）结果将会非常粗糙
-- 关键点方法：SIFT之类的模板匹配，依赖于纹理特征。之前深度学习的关键点检测方法，使用Feature Map，如果keypoint超出图像将无法完成检测。
-- 
+- 关键点方法：SIFT之类的模板匹配，依赖于纹理特征。之前深度学习的关键点检测方法，使用Feature Map，如果keypoint超出图像将无法完成检测，抗遮挡能力差(遮掉关键点，或关键的featuremap）。
+- keypoint属于稀疏sparse方法，稠密dense方法具有很好的抗遮挡能力，但是之前的dense方法直接投票姿态不太好应用。
+
+思路就是用dense方法去投票keypoint，将两者的优势结合起来，实现抗遮挡截断truncation。
+
+## 关键点
+
+- 什么是RANSAC算法 
+- 什么是PnP算法
+
+## 文献
+
+- Uncertainty-driven 6d pose estimation of objects and scenes from a single rgb image
+- Posecnn:A convolutional neural network for 6d object pose estimation in cluttered scenes
+
+多instances：
+
+- Personlab: Person pose estimation and instance segmentation with a bottom-up, part-based,geometric embedding model
+
+网络骨架
+
+- Deep Residual Learning for Image Recognition
+
