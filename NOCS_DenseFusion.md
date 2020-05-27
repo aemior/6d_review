@@ -39,6 +39,21 @@ Introduction 和 survey 做得比较好，充分说明了Categrory 的 重要性
 
 只说之前有的方法合成出来的数据是飘在空中的，然后自己提出的混合现实的方法关注到上下文更加真实。
 
+## 数据集
+
+使用了一种平面检测的方法 Fast plane extraction in organized point clouds using agglomerative hierarchical
+clustering 检测平面，然后现实场景作为背景，把CAD模型放进去。真实数据是使用了三维重建的方法，特制的方法，没有找到出处。
+
+## 方法
+
+NOCS 实际上是在MASK-RCNN后面装了3个head，分别是XYZ,XYZ是NOCS的坐标，最后会通过点云ICP去回归出实际的6D坐标，Least-squares estimation of transformation parameters between two point patterns。（为什么比SegICP好）
+
+因为搜索空间太大， NOCS坐标预测上使用分类问题来代替回归问题。
+
+处理对称性的方法是手工调整LOSS。
+
+Baseline是用随机模型去，做SegICP，关键就是比这种Baseline好，相当于生成了一个Model不用随机选一个导致误差。
+
 ## DenseFusion
 
 输入是用RGB-D做的，Intro里面也是有很多对3D detection 的观点，提到了一个前序工作，PointFusion 需要看看，实际内容里面，主要做的是Fusion，就是把 RGB 和 pointcloud 融合到一个网络里面，然后也不用PNP，做成Seamless的。目前理解上是卡在怎么做Embedding提取特征。
