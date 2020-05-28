@@ -54,6 +54,41 @@ NOCS 实际上是在MASK-RCNN后面装了3个head，分别是XYZ,XYZ是NOCS的�
 
 Baseline是用随机模型去，做SegICP，关键就是比这种Baseline好，相当于生成了一个Model不用随机选一个导致误差。
 
+# 6-PACK
+
+## Abstract
+
+能做Categroy-Level 的pose，基于interframe 的 keypoint Pose track，KeyPoint 是学习出来的。
+
+需要注意的点是文章里提到了Pose Track的问题，为什么需要做Track？
+
+## Introduction
+
+之前的工作，POSE一般只是做到 instance-Level 的， Track只是做到2D的，NOCS做的是Category，但是需要Track by detection（是不是Track的必要性？）。本文的目的是要做 Categrory 的 Pose Track，原理是基于Key Point的，而且这个KeyPoint 是 Unsupervised 学到的。比起BaseLine NOCS的优势是，使用了帧间信息，然后说实验上NOCS的dense point对噪音和遮挡都很敏感；比起其它Tracker的优势就是做到了Pose的Track。
+
+## RelatedWork & Problem Def
+
+最早的是说SIFT时代那一批，Keypoint recognition using randomized trees；Point matching as a classifi-
+cation problem for fast and robust object pose estimation 加上LineMod时代那一批 Real-time 3d model-based tracking using edge and keypoint features for robotic manipulation；The moped framework: Object recognition and pose estimation for manipulation；给出的劣势是遮挡，复杂场景和光照变化不鲁棒。
+
+最近的6D姿态检测是把 DeepIM 分为二Rendering，和把Segmention Driven分为Silhouette，给出的劣势是需要Model，他这个分法是为什么？
+
+自动驾驶领域Category-Level的数据集非常充分，研究也非常充分。说是最为相近的方法，关键点是通过人工标记的，但是他把Semantic keypoints Object也算进去是为什么？
+
+最后说NOCS，就是说实验上对噪音敏感。
+
+总结就是无监督的Keypoint方法，而且不是直接使用KeypointNet，说是KeypointNet，只有在Clean和目标在中心的时候才有用，所以本文的方法里面引用了锚点机制，算是一大改进。
+
+问题定义里面说，assume the initial pose of object is given，但是怎么given没有说清楚，只是说同一类物体按照相似的姿态放在一个规范的帧正中间，然后还说Robust to errors of initial pose,怎么做到，
+
+最后给了三篇inspire work：
+
+- 6-dof object pose from semantic keypoints
+- Discovery of latent 3d keypoints via end-to-end geometric reasoning
+- Viewpoints and keypoints
+
+
+
 ## DenseFusion
 
 输入是用RGB-D做的，Intro里面也是有很多对3D detection 的观点，提到了一个前序工作，PointFusion 需要看看，实际内容里面，主要做的是Fusion，就是把 RGB 和 pointcloud 融合到一个网络里面，然后也不用PNP，做成Seamless的。目前理解上是卡在怎么做Embedding提取特征。
