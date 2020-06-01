@@ -79,12 +79,12 @@ cation problem for fast and robust object pose estimation 加上LineMod时代那
 
 总结就是无监督的Keypoint方法，而且不是直接使用KeypointNet，说是KeypointNet，只有在Clean和目标在中心的时候才有用，所以本文的方法里面引用了锚点机制，算是一大改进。
 
-问题定义里面说，assume the initial pose of object is given，但是怎么given没有说清楚，只是说同一类物体按照相似的姿态放在一个规范的帧正中间，然后还说Robust to errors of initial pose,怎么做到，
+问题定义里面说，assume the initial pose of object is given，~~但是怎么given没有说清楚~~DenseFusion，只是说同一类物体按照相似的姿态放在一个规范的帧正中间，然后还说Robust to errors of initial pose,怎么做到，~~还有文献里面提到的SE(3)和SO(3)是个什么概念~~？SE(3)旋转加平移，SO(3)旋转
 
 最后给了三篇inspire work：
 
 - 6-dof object pose from semantic keypoints
-- Discovery of latent 3d keypoints via end-to-end geometric reasoning
+- `Discovery of latent 3d keypoints via end-to-end geometric reasoning
 - Viewpoints and keypoints
 
 
